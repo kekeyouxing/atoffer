@@ -6,6 +6,7 @@ package atoffer.dynamic;
  *求该青蛙跳上一个n级的台阶总共有多少种跳法（先后次序不同算不同的结果）。
  */
 public class JumpFloor {
+	
 	public int jumpFloor(int n) {
 		if(n==0 || n==1 || n==2) {
 			return n;
@@ -16,5 +17,6 @@ public class JumpFloor {
 			dp[i] = dp[i-1]+dp[i-2];
 		}
 		return dp[n];
+		
 	}
 }
