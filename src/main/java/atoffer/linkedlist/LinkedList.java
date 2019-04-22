@@ -7,9 +7,9 @@ package atoffer.linkedlist;
  */
 public class LinkedList {
 
-	LinkedNode pHead = null;
+	protected LinkedNode pHead = null;
 	
-	public void createLinkedList(int[] arr) {
+	public LinkedNode createLinkedList(int[] arr) {
 		
 		pHead = new LinkedNode(-1);
 		LinkedNode cur = pHead;
@@ -17,7 +17,7 @@ public class LinkedList {
 			cur.next = new LinkedNode(arr[i]);
 			cur = cur.next;
 		}
-		
+		return pHead;
 	}
 	
 	public void add(int val) {
