@@ -66,10 +66,9 @@ public class LinkedList {
 		
 		LinkedNode first = pHead.next;
 		while(first != null) {
-			System.out.print(first.val+" ");
+			System.out.print(first.val+"->");
 			first = first.next;
 		}
-		
 	}
 	
 	public boolean isEmpty() {
@@ -78,25 +77,4 @@ public class LinkedList {
 		
 	}
 	
-	public static void main(String[] args) {
-		
-		LinkedList link = new LinkedList();
-		int [] arr = new int[] {1,2,3,4,2,5,7};
-		
-		System.out.println("LinkedList is:");
-		link.createLinkedList(arr);
-		link.printList();
-		
-		int delVal = 2;
-		System.out.println("\nafter delete "+delVal+" LinkedList is:");
-		if(link.containsOf(delVal)) {
-			link.remove(delVal);
-		}
-		link.printList();
-		
-		int addVal = 4;
-		System.out.println("\nafter add "+addVal+" LinkedList is:");
-		link.add(addVal);
-		link.printList();
-	}
 }
