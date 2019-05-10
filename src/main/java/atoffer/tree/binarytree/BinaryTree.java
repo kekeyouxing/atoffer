@@ -1,13 +1,14 @@
-package atoffer.tree;
+package atoffer.tree.binarytree;
 
+import atoffer.tree.TreeNode;
 
-public class Tree{
+public class BinaryTree{
 	
 	
 	// ----------------------------------------------------- Constructors
 	
 	
-	public Tree(int [] pre,int [] in) {
+	public BinaryTree(int [] pre,int [] in) {
 		
 		initTree(pre, in);
 		
@@ -17,13 +18,12 @@ public class Tree{
 	// ----------------------------------------------------- Instance Variable
 	
 	
-	public int level;
+	private int level;
 	
-	public TreeNode root;
+	private TreeNode root;
 	
 	
 	// ----------------------------------------------------- Properties
-	
 	
 	public int getLevel() {
 		
@@ -39,6 +39,14 @@ public class Tree{
 	
 	// ----------------------------------------------------- Construct Tree
     
+	
+	
+	public void initTree(int [] pre,int [] in) {
+		
+		root= constructCore(pre, in, 0, pre.length-1, 0, in.length-1);
+		level = getLevelCore(root);
+		
+	}
 	
 	public TreeNode constructCore(int[] pre, int[] in, int preStart, int preEnd, int inStart, int inEnd) {
 		
@@ -72,13 +80,6 @@ public class Tree{
 		int right = getLevelCore(root.right);
 		
 		return ((left >= right) ? left : right)+1;
-		
-	}
-	
-	private void initTree(int [] pre,int [] in) {
-		
-		root= constructCore(pre, in, 0, pre.length-1, 0, in.length-1);
-		level = getLevelCore(root);
 		
 	}
 
