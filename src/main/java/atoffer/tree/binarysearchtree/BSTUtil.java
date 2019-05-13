@@ -1,6 +1,5 @@
 package atoffer.tree.binarysearchtree;
 
-
 import atoffer.tree.TreeNode;
 
 public class BSTUtil {

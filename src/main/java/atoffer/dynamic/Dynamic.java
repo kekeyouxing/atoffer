@@ -8,73 +8,89 @@ import atoffer.array.Vector;
 public class Dynamic {
 	
 	/**
-	 * @param n
-	 * @return
-	 * 
+	 * <p>
+	 * Given a positive integer n, 
+	 * break it into the sum of at least two positive integers and maximize the product of those integers.
+     * <p>
+	 * @param n integer n
+	 * @return the maximum product you can get
+	 * @see <a href="https://leetcode.com/problems/integer-break/">integer-break</a>
 	 */
-	public int cut(int n) {
-		
-		if(n<2) {
+	public int integerBreak(int n) {
+		if(n < 2)
 			return 0;
-		}
-		
-		if(n == 3) {
+		if(n == 2)
+			return 1;
+		if(n == 3)
 			return 2;
-		}
-		
-		if(n == 4) {
-			return 4;
-		}
 		
 		int[] dp = new int[n+1];
 		dp[0] = 0;
 		dp[1] = 1;
 		dp[2] = 2;
 		dp[3] = 3;
-		for(int i=4; i<=n; i++) {
+		for(int i = 4; i <= n; i++) {
 			
 			int max = 0;
-			for(int j=1; j<=n/2; j++) {
-				if(dp[j]*dp[n-j] > max) {
-					max = dp[j]*dp[n-j];
+			for(int j = 1; j <= i/2; j++) {
+				if(dp[j] * dp[i-j] > max) {
+					max = dp[j] * dp[i-j];
 				}
 			}
 			dp[i] = max;
 			
 		}
 		return dp[n];
-		
 	}
 	
-	public int jumpFloor(int n) {
-		if(n==0 || n==1 || n==2) {
+	/**
+	 * <p>
+	 * You are climbing a stair case. It takes n steps to reach to the top.
+	 * Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+	 * <p>
+	 * @param n the total steps of stair
+	 * @return distinct ways you can climb
+	 * @see <a href="https://leetcode.com/problems/climbing-stairs/">climbing-stairs</a>
+	 */
+	public int climbStairs(int n) {
+		if(n == 0 || n == 1 || n == 2) {
 			return n;
 		}
 		int[] dp = new int[n+1];
-		dp[0] = 0;dp[1] =1;dp[2] =2;
-		for(int i=3; i<=n; i++) {
-			dp[i] = dp[i-1]+dp[i-2];
+		dp[0] = 0; dp[1] = 1; dp[2] = 2;
+		
+		for(int i = 3; i <= n; i++) {
+			dp[i] = dp[i-1] + dp[i-2];
 		}
 		return dp[n];
-		
 	}
 	
-	public int numDecodings(String str) {
+	/**
+	 * <p>A message containing letters from A-Z is being encoded to numbers using the following mapping:<p>
+	 * <p>'A' -> 1<p>
+	 * <p>'B' -> 2<p>
+	 * <p>...<p>
+	 * <p>'Z' -> 26<p>
+	 * @param s a non-empty string containing only digits
+	 * @return the total number of ways to decode {@code s}
+	 * @see <a href="https://leetcode.com/problems/decode-ways/">decode-ways</a>
+	 */
+	public int numDecodings(String s) {
 		
-		if(str == null || str.length()==0) {
+		if(s == null || s.length() == 0) {
 			return 0;
 		}
-		int[] val = str2IntArr(str);
+		int[] val = string2Array(s);
 		int[] dp = new int[val.length+1];
 		
-		dp[0] = 1; dp[1] = val[0]==0?0:1;
-		for(int i=2; i<=val.length; i++) {
+		dp[0] = 1; dp[1] = (val[0] == 0 ? 0 : 1);
+		for(int i = 2; i <= val.length; i++) {
 			
-			if(val[i-1]!=0) {
-				dp[i] = dp[i]+dp[i-1];
+			if(val[i-1] != 0) {
+				dp[i] = dp[i] + dp[i-1];
 			}
-			if(val[i-2]!=0 && val[i-2]*10+val[i-1]<=26) {
-				dp[i] =dp[i]+dp[i-2];
+			if(val[i-2] != 0 && val[i-2] * 10 + val[i-1] <= 26) {
+				dp[i] = dp[i] + dp[i-2];
 			}
 			
 		}
@@ -82,11 +98,11 @@ public class Dynamic {
 		
 	}
 	
-	private int[] str2IntArr(String str) {
+	private int[] string2Array(String s) {
 		
-		int[] val = new int[str.length()];
+		int[] val = new int[s.length()];
 		for(int i=0; i<val.length; i++) {
-			val[i] = Integer.parseInt(str.substring(i, i+1));
+			val[i] = Integer.parseInt(s.substring(i, i+1));
 		}
 		return val;
 		
