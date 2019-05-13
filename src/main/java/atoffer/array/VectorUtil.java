@@ -106,7 +106,62 @@ public class VectorUtil {
 		return maxSum;
 		
 	}
+	
+	public int getNumberOfK(int[] arr, int k) {
+		
+		if(arr == null) {
+			throw new NullPointerException("getNumberOfK's numbers is null");
+		}
+		int first = getFirstK(arr, k);
+		int last = getLastK(arr, k);
+		if(last==-1 || last==-1) {
+			return 0;
+		}
+		return last-first+1;
+	}
 
+	public int getFirstK(int[] arr, int k) {
+		
+		int start = 0, end = arr.length-1;
+		int middle = (start+end)/2;
+		while(start<=end) {
+			
+			if(arr[middle]<k) {
+				start = middle+1;
+			}else if(arr[middle]>k) {
+				end = middle-1;
+			}else if((middle-1>0) && arr[middle-1] !=k ) {
+				end = middle-1;
+			}else {
+				return middle;
+			}
+			
+			middle = (start+end)/2;
+			
+		}
+		return -1;
+		
+	}
+	
+	public int getLastK(int[] arr, int k) {
+		int start = 0, end = arr.length-1;
+		int middle = (start+end)/2;
+		while(start<end) {
+			
+			if(arr[middle]<k) {
+				start = middle+1;
+			}else if(arr[middle]>k) {
+				end = middle-1;
+			}else if((middle+1)<=end && arr[middle+1]!=k) {
+				start = middle+1;
+			}else {
+				return middle;
+			}
+			
+		}
+		return -1;
+	}
+	
 	public static void main(String[] args) {
 		VectorUtil vectorUtil = new VectorUtil();
 		int[] arr = new int[] {1,-2,3,10,-4,7,2,-5};

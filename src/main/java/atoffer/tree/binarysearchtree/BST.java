@@ -23,64 +23,76 @@ public class BST {
 		return level;
 		
 	}
-	
+
 	private void initTree(int[] val) {
 		
-		root = constructCore(val);
-		
-	}
-
-	private TreeNode constructCore(int[] val) {
+		if(val==null || val.length==0) {
+			throw new NullPointerException("tree is null");
+		}
 		
 		for(int i=0; i<val.length; i++) {
-			insert(val[i]);
-		}
-		return null;
-		
-	}
-	
-	public boolean insert(int val) {
-		
-		if(!containsOf(root, val)) {
-			insertCore(root, val);
-			return true;
-		}
-		return false;
-		
-	}
-	
-	public boolean containsOf(TreeNode root, int val) {
-		
-		if(root == null) {
-			return false;
-		}
-		if(root.val == val) {
-			return true;
-		}
-		
-		if(root.val < val) {
-			return containsOf(root.right, val);
-		}
-		if(root.val > val) {
-			return containsOf(root.left, val);
-		}
-		return false;
-		
-	}
-	
-	private void insertCore(TreeNode root, int val) {
-		
-		if(root == null) {
-			root = new TreeNode(val);
-		}
-		
-		if(root.val < val) {
-			insertCore(root.right, val);
-		}
-		if(root.val > val) {
-			insertCore(root.left, val);
+			TreeNode node = new TreeNode(val[i]);
+			root = insertCore(root, node);
 		}
 		
 	}
 
+	private TreeNode insertCore(TreeNode root, TreeNode node) {
+		
+		if(root == null) {
+			return node;
+		}
+		if(node.val < root.val) {
+			root.left = insertCore(root.left, node);
+		}else {
+			root.right = insertCore(root.right, node);
+		}
+		return root;
+	}
+	
+	public boolean insert(TreeNode node) {
+		
+		if(!containsOf(root, node)) {
+			insertCore(root, node);
+			return true;
+		}
+		return false;
+		
+	}
+
+	public boolean containsOf(TreeNode root, TreeNode node) {
+		
+		if(root == null ) {
+			return false;
+		}
+		if(root.equals(node)) {
+			return true;
+		}
+		if(root.val > node.val) {
+			return containsOf(root.left, node);
+		}else {
+			return containsOf(root.right, node);
+		}
+		
+	}
+	
+	public int size() {
+		return sizeCore(root);
+	}
+
+	private int sizeCore(TreeNode root) {
+		
+		if(root == null) {
+			return 0;
+		}
+		return sizeCore(root.left)+sizeCore(root.right)+1;
+		
+	}
+	
+	@Override
+	public String toString() {
+		
+		return super.toString();
+		
+	}
 }

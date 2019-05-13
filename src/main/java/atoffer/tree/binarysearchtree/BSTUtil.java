@@ -7,6 +7,10 @@ public class BSTUtil {
 	
 	private BST tree;
 	
+	private int count;
+	
+	TreeNode kthNode = null;
+	
 	public BSTUtil(BST tree) {
 		
 		this.tree = tree;
@@ -62,4 +66,23 @@ public class BSTUtil {
 		
 	}
 	
+	public TreeNode  kthNode(int k) {
+		TreeNode root=tree.getRoot();
+		kthNodeCore(root, k);
+		return kthNode;
+	}
+
+	private void kthNodeCore(TreeNode root, int k) {
+		
+		if(root == null) {
+			return;
+		}
+		if(root.left != null) kthNodeCore(root.left, k);
+		count++;
+		if(k==count) {
+			kthNode = root;
+		}
+		if(root.right != null) kthNodeCore(root.right, k);
+		
+	}
 }
