@@ -1,10 +1,6 @@
 package atoffer.sort;
 
-import atoffer.util.Util;
-
 public class Sort {
-	
-	Util util = new Util();
 	
 	public int[] bubbleSort(int[] arr) {
 		
@@ -12,7 +8,7 @@ public class Sort {
 			for(int j=0; j<arr.length-i-1;j++) {
 				
 				if(arr[j] > arr[j+1]) {
-					util.swap(arr, j, j+1);
+					swap(arr, j, j+1);
 				}
 				
 			}
@@ -46,7 +42,7 @@ public class Sort {
 					min = j;
 				}
 			}
-			util.swap(arr, min, i);
+			swap(arr, min, i);
 		}
 		return arr;
 		
@@ -58,7 +54,7 @@ public class Sort {
 	
 	public void quickSortCore(int[] arr, int start, int end) {
 		
-		int i = util.partition(arr, start, end);
+		int i = partition(arr, start, end);
 		quickSortCore(arr, start, i-1);
 		quickSortCore(arr, i+1, end);
 		
@@ -107,4 +103,28 @@ public class Sort {
 		System.arraycopy(temp, 0, arr, start, k);
 	}
 	
+	private int partition(int[] nums, int start, int end) {
+		int middle = nums[start];
+		
+		while(start<end) {
+			if(start<end && nums[end]>middle) {
+				end--;
+			}
+			nums[start] = nums[end];
+			if(start<end && nums[start] <= middle) {
+				start++;
+			}
+			nums[end] = nums[start];
+		}
+		nums[start] = middle;
+		return start;
+	}
+	
+	private void swap(int[] nums, int start, int end){
+		
+		int temp = nums[start];
+		nums[start] = nums[end];
+		nums[end] = temp;
+		
+	}
 }

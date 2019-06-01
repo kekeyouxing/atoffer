@@ -11,11 +11,11 @@ public class Bootstrap {
 		LinkedNode pHead = link.createLinkedList(arr);
 		link.printList();
 		
-		LinkedListUtil listUtil = new LinkedListUtil(link);
-		
-		System.out.println("\nafter reversing LinkedList, LinkedList is:");
-		listUtil.reverseList(pHead);
-		link.printList();
+//		LinkedListUtil listUtil = new LinkedListUtil(link);
+//		
+//		System.out.println("\nafter reversing LinkedList, LinkedList is:");
+//		listUtil.reverseList(pHead);
+//		link.printList();
 		
 	}
 	

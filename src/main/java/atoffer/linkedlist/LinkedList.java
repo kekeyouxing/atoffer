@@ -4,7 +4,7 @@ package atoffer.linkedlist;
 /**
  * @author Ke
  *包含头结点的链表
- */
+ */ 
 public class LinkedList {
 
 	protected LinkedNode pHead = null;
