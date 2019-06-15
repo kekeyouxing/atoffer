@@ -50,6 +50,14 @@ public class StringUtil {
      * <p>
      * Given an input string, reverse the string word by word.
      * <p>
+     * Examples:
+     * <blockquote>
+     * <pre>
+     * Input: "a good   example"
+     * Output: "example good a"
+     * Explanation: You need to reduce multiple spaces between two words to a single space in the reversed string.
+     * </pre>
+     * </blockquote>
      * @see <a href="https://leetcode.com/problems/reverse-words-in-a-string/">reverse-words-in-a-string</a>
      */
     public String reverseWords(String s) {
