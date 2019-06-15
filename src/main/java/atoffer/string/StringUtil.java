@@ -29,7 +29,7 @@ public class StringUtil {
 			return 0;
 		}
 		Vector<Character> temp = new Vector<Character>();
-		int curMax = 0;
+		int max = 0;
 		for(int i=0; i<s.length(); i++) {
 			
 			char ch = s.charAt(i);
@@ -37,12 +37,12 @@ public class StringUtil {
 				temp.clear();
 			}
 			temp.addElement(ch);
-			if(temp.size()>curMax) {
-				curMax = temp.size();
+			if(temp.size()>max) {
+				max = temp.size();
 			}
 			
 		}
-		return curMax;
+		return max;
 		
 	}
     

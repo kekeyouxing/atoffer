@@ -1,6 +1,7 @@
 package atoffer.matrix;
 
 public class Matrix {
+	
 	public void printMatrix(int[][] matrix) {
 		if(matrix == null || matrix.length == 0) {
 			return;
@@ -39,11 +40,5 @@ public class Matrix {
 			}
 		}
 	}
-	
-	public static void main(String[] args) {
-		int[][] data = new int[][] {{1,2,3},{4,5,6},{7,8,9},{10,11,12}};
-		Matrix matrix = new Matrix();
-		matrix.printMatrix(data);
-		
-	}
+
 }

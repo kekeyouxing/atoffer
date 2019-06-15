@@ -8,52 +8,52 @@ public class DevideConquer {
 	
 	private int inversePairsCount = 0;
 	
-	public int inversePairs(int[] arr) {
+	public int inversePairs(int[] nums) {
 		
-		if(arr == null) {
+		if(nums == null) {
 			throw new NullPointerException("inversePairs's numbers is null");
 		}
-		int[] temp = new int[arr.length]; 
-		inversePairsCore(arr, temp, 0, arr.length-1);
+		int[] temp = new int[nums.length]; 
+		inversePairsCore(nums, temp, 0, nums.length-1);
 		return inversePairsCount;
 	}
 
-	private void inversePairsCore(int[] arr, int[] temp, int start, int end) {
+	private void inversePairsCore(int[] nums, int[] temp, int start, int end) {
 		
 		if(start<end) {
 			
 			int middle = (start+end)/2;
-			inversePairsCore(arr, temp, start, middle);
-			inversePairsCore(arr, temp, middle+1, end);
-			inverseCount(arr, temp, start, end, middle);
+			inversePairsCore(nums, temp, start, middle);
+			inversePairsCore(nums, temp, middle+1, end);
+			inverseCount(nums, temp, start, end, middle);
 			
 		}
 		
 	}
 
-	private void inverseCount(int[] arr, int[] temp, int start, int end, int middle) {
+	private void inverseCount(int[] nums, int[] temp, int start, int end, int middle) {
 		
 		int i = start;
 		int j = middle+1;
 		int k = 0;
 		while(i<=middle && j<=end) {
 			
-			if(arr[i]<=arr[j]) {
-				temp[k++] = arr[i++];
+			if(nums[i] <= nums[j]) {
+				temp[k++] = nums[i++];
 			}else {
-				temp[k++] = arr[j++];
+				temp[k++] = nums[j++];
 				inversePairsCount += middle-start+1;
 			}
 			
 		}
 		
 		while(i<=middle) {
-			temp[k++] = arr[i++];
+			temp[k++] = nums[i++];
 		}
 		while(j<=end) {
-			temp[k++] = arr[j++];
+			temp[k++] = nums[j++];
 		}
-		System.arraycopy(temp, 0, arr, start, k);
+		System.arraycopy(temp, 0, nums, start, k);
 		
 	}
 	

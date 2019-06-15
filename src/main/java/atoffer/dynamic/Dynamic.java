@@ -126,15 +126,10 @@ public class Dynamic {
 			dp[i][0] = dp[i-1][0] + grid[i][0];
 		}
 		for(int i = 1; i < rows; i++) {
-			
 			for(int j = 1; j < cols; j++) {
-				if(dp[i-1][j] <= dp[i][j-1]) {
-					dp[i][j] = dp[i-1][j] + grid[i][j];
-				}else {
-					dp[i][j] = dp[i][j-1] + grid[i][j];
-				}
+				int min = dp[i-1][j] <= dp[i][j-1] ? dp[i-1][j] : dp[i][j-1];
+				dp[i][j] = min + grid[i][j];
 			}
-			
 		}
 		return dp[rows-1][cols-1];
 	}
@@ -146,7 +141,7 @@ public class Dynamic {
 	 * <p>
 	 * @param n  the index of the ugly number.
 	 * @return n-th ugly number.
-	 * @see <a href="https://leetcode.com/problems/ugly-number-ii/">nthUglyNumber</a>
+	 * @see <a href="https://leetcode.com/problems/ugly-number-ii">nthUglyNumber</a>
 	 */
 	public int nthUglyNumber(int n) {
 		if(n<=0) {
@@ -182,4 +177,107 @@ public class Dynamic {
         int m1 = v1 < v2 ? v1 : v2;
         return m1 < v3 ? m1 : v3;
     }
+    
+    /**
+     * <p>
+     * You are a professional robber planning to rob houses along a street. 
+     * Each house has a certain amount of money stashed, 
+     * the only constraint stopping you from robbing each of them is that adjacent houses have security system connected 
+     * and it will automatically contact the police if two adjacent houses were broken into on the same night.
+     * Given a list of non-negative integers representing the amount of money of each house, 
+     * determine the maximum amount of money you can rob tonight without alerting the police.
+     * <p>
+     * <blockquote>
+     * <pre>
+     * Input: [1,2,3,1]
+     * Output: 4
+     * Explanation: Rob house 1 (money = 1) and then rob house 3 (money = 3).
+     *              Total amount you can rob = 1 + 3 = 4.
+     * </pre>
+     * </blockquote>
+     * @param nums
+     * @see <a href="https://leetcode.com/problems/house-robber">house-robber</a>
+     */
+    public int rob(int[] nums) {
+    	if(nums == null || nums.length == 0) {
+    		return 0;
+    	}
+    	if(nums.length == 1) {
+    		return nums[0];
+    	}
+    	int n = nums.length;
+    	int[] dp = new int[n];
+    	dp[0] = nums[0];
+    	dp[1] = Math.max(nums[0], nums[1]);
+    	for(int i=2; i<n;i++) {
+    		dp[i] = nums[i]+dp[i-2] >= dp[i-1] ? nums[i]+dp[i-2] : dp[i-1];
+    	}
+		return dp[n-1];
+    }
+    
+    /**
+     * <p>
+     * Given a string s consists of upper/lower-case alphabets and empty space characters ' ', 
+     * return the length of last word in the string.
+     * If the last word does not exist, return 0.
+     * Note: A word is defined as a character sequence consists of non-space characters only.
+     * <p>
+     * @param s
+     * @see <a href="https://leetcode.com/problems/length-of-last-word">length-of-last-word</a>
+     */
+    public int lengthOfLastWord(String s) {
+    	if(s==null || s.length() == 0) {
+    		return 0;
+    	}
+    	if(s.length() == 1) {
+    		return s.charAt(0) == ' ' ? 0 : 1;
+    	}
+        char[] ch = s.toCharArray();
+        
+        int[] dp = new int[s.length()];
+        int n = s.length();
+        dp[0] = s.charAt(0) == ' ' ? 0 : 1;
+        for(int i=1; i<ch.length; i++) {
+        	if(ch[i] == ' ') {
+        		dp[i] = dp[i-1];
+        	}else {
+            	if(ch[i-1] == ' ' ) {
+            		dp[i] = 1;
+            	}else {
+            		dp[i] = dp[i-1]+1;
+            	}
+        	}
+        }
+        return dp[n-1];
+    }
+    
+    
+    /**
+     * <p>
+     * On a staircase, the i-th step has some non-negative cost cost[i] assigned (0 indexed).
+     * Once you pay the cost, you can either climb one or two steps. 
+     * You need to find minimum cost to reach the top of the floor, 
+     * and you can either start from the step with index 0, or the step with index 1.
+     * <p>
+     * <blockquote>
+     * <pre>
+     * Input: cost = [10, 15, 20]
+     * Output: 15
+     * Explanation: Cheapest is start on cost[1], pay that cost and go to the top.
+     * </pre>
+     * </blockquote>
+     * @param cost
+     * @see <a href="https://leetcode.com/problems/min-cost-climbing-stairs">min-cost-climbing-stairs</a>
+     */
+    public int minCostClimbingStairs(int[] cost) {
+    	int n = cost.length;
+    	int[] dp = new int[n+1];
+    	dp[0] = 0;
+    	dp[1] = 0;
+    	for(int i=2; i<=cost.length; i++) {
+    		dp[i] = dp[i-1]+cost[i-1] <= dp[i-2]+cost[i-2] ? dp[i-1]+cost[i-1] : dp[i-2]+cost[i-2];
+    	}
+		return dp[n];  
+    }
+    
 }

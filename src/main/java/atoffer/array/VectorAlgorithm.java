@@ -1,7 +1,9 @@
 package atoffer.array;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 
 public class VectorAlgorithm {
 	
@@ -14,13 +16,12 @@ public class VectorAlgorithm {
 		int start = 0, end = arr.length-1;
 		int index = partition(arr, start, end);
 		while(middle!=index) {
-			
 			if(index>middle) {
-				index = partition(arr, start, index-1);
+				end = index-1;
 			}else {
-				index = partition(arr, index+1, end);
+				start = index+1;
 			}
-			
+			index = partition(arr, start, end);
 		}
 		
 		int result = arr[index];
@@ -72,11 +73,10 @@ public class VectorAlgorithm {
 		while(index!=resultIndex) {
 			if(index > resultIndex) {
 				end = index-1;
-				index = partition(nums, start, end);
 			}else {
 				start = index+1;
-				index = partition(nums, start, end);
 			}
+			index = partition(nums, start, end);
 		}
 		
 		return nums[resultIndex];
@@ -121,7 +121,7 @@ public class VectorAlgorithm {
 			return Integer.MIN_VALUE;
 		}
 		int curSum = 0;
-		int maxSum = nums[0];
+		int max = nums[0];
 		for(int i=0;i<nums.length;i++) {
 			
 			if(curSum<=0) {
@@ -129,12 +129,12 @@ public class VectorAlgorithm {
 			}else {
 				curSum = curSum+nums[i];
 			}
-			if(curSum>maxSum) {
-				maxSum = curSum;
+			if(curSum>max) {
+				max = curSum;
 			}
 			
 		}
-		return maxSum;
+		return max;
 	}
 	
 	/**
@@ -406,9 +406,11 @@ public class VectorAlgorithm {
 	}
     /**
      * <p>
+     * 
      * Given an array nums of n integers where n > 1,  
      * return an array output such that output[i] is equal to the product of all the elements of nums except nums[i].
      * <p>
+     * Example:
      * <blockquote>
      * <pre>
      * Input:  [1,2,3,4]
@@ -439,4 +441,62 @@ public class VectorAlgorithm {
     	}
 		return result;
     }
+    
+    /**
+     * <p>
+     * Given a matrix of m x n elements (m rows, n columns), 
+     * return all elements of the matrix in spiral order.
+     * <p>
+     * Example:
+     * <blockquote>
+     * <pre>
+     * Input:
+     * [
+     *  [ 1, 2, 3 ],
+     *  [ 4, 5, 6 ],
+     *  [ 7, 8, 9 ]
+     * ]
+     * Output: [1,2,3,6,9,8,7,4,5]
+     * </pre>
+     * </blockquote>
+     * @param matrix
+     * @see <a href="https://leetcode.com/problems/spiral-matrix">spiral-matrix</a>
+     */
+    public List<Integer> spiralOrder(int[][] matrix) {
+    	List<Integer> result = new ArrayList<Integer>();
+		if(matrix == null || matrix.length == 0) {
+			return result;
+		}
+		int rows = matrix.length;
+		int cols = matrix[0].length;
+		int start = 0;
+		while(rows > start * 2 && cols > start * 2) {
+			circleValue(matrix, start, rows, cols, result);
+			start++;
+		}
+		return result;
+    }
+
+	private void circleValue(int[][] matrix, int start, int rows, int cols, List<Integer> result) {
+		int endX = rows-start-1;
+		int endY = cols-start-1;
+		for(int i = start; i <= endY; i++) {
+			result.add(matrix[start][i]);
+		}
+		if(endX>start) {
+			for(int i = start+1; i <= endX; i++) {
+				result.add(matrix[i][endY]);
+			}
+		}
+		if(endY > start && endX > start) {
+			for(int i = endY-1; i>=start; i--) {
+				result.add(matrix[endX][i]);
+			}
+		}
+		if(start < endX && endY>start) {
+			for(int i=endX-1; i>start; i--) {
+				result.add(matrix[i][start]);
+			}
+		}
+	}
 }
