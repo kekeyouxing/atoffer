@@ -10,7 +10,6 @@ public class LinkedList {
 	protected LinkedNode pHead = null;
 	
 	public LinkedNode createLinkedList(int[] arr) {
-		
 		pHead = new LinkedNode(-1);
 		LinkedNode cur = pHead;
 		for(int i=0; i<arr.length; i++) {
@@ -21,7 +20,6 @@ public class LinkedList {
 	}
 	
 	public void add(int val) {
-		
 		LinkedNode pre = pHead;
 		
 		while(pre.next !=null)
@@ -29,11 +27,9 @@ public class LinkedList {
 		
 		LinkedNode node = new LinkedNode(val);
 		pre.next = node;
-		
 	}
 	
 	public void remove(int val) {
-		
 		LinkedNode pre = pHead;
 		while(pre != null && pre.next != null) {
 			if(pre.next.val == val) {
@@ -43,11 +39,9 @@ public class LinkedList {
 			}
 			
 		}
-		
 	}
 	
 	public boolean containsOf(int val) {
-		
 		LinkedNode pre = pHead.next;
 		
 		while(pre != null ) {
@@ -59,11 +53,9 @@ public class LinkedList {
 			
 		}
 		return false;
-		
 	}
 	
 	public void printList() {
-		
 		LinkedNode first = pHead.next;
 		while(first != null) {
 			System.out.print(first.val+"->");
@@ -72,9 +64,7 @@ public class LinkedList {
 	}
 	
 	public boolean isEmpty() {
-		
 		return pHead.next == null;
-		
 	}
 	
 }

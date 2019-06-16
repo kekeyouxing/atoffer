@@ -2,7 +2,7 @@ package atoffer.string;
 
 import atoffer.array.Vector;
 
-public class StringUtil {
+public class StringAlgorithm {
 	
 	public String replaceSpaces(StringBuffer str) {
 		
@@ -81,6 +81,13 @@ public class StringUtil {
 	 * you must do this by modifying the input array in-place with O(1) extra memory.
 	 * You may assume all the characters consist of printable ascii characters.
      * <p>
+     * Example:
+     * <blockquote>
+     * <pre>
+     * Input: ["H","a","n","n","a","h"]
+     * Output: ["h","a","n","n","a","H"]
+     * </pre>
+     * </blockquote>
      * @see <a href="https://leetcode.com/problems/reverse-string/">reverse-string</a>
      */
     public void reverseString(char[] s) {
@@ -92,9 +99,15 @@ public class StringUtil {
     
 	
     /**
+     * Example:
+     * <blockquote>
+     * <pre>
+     * Input: s = "hello world!", k = 2
+     * Output: "llo worldhe"
+     * </pre>
+     * </blockquote>
      * @param s
      * @param k
-     * @return
      */
     public String leftRotateString(String s,int k) {
         if(k<0 || k>=s.length()) {
@@ -117,19 +130,23 @@ public class StringUtil {
 		}
 	}
 	
-	private int StrToInt(String str) {
-		if(str == null || str.length() == 0) {
+	public int String2Int(String s) {
+		if(s == null || s.length() == 0) {
 			return 0;
 		}
 		boolean isNegative = false;
 		int result = 0;
-		for(int i=0; i<str.length(); i++) {
-			char ch = str.charAt(i);
+		for(int i=0; i<s.length(); i++) {
+			char ch = s.charAt(i);
 			if(i==0) {
 				if(ch=='-') {
 					isNegative = true;
+					continue;
 				}
-				continue;
+				if(ch=='+') {
+					isNegative = false;
+					continue;
+				}
 			}
 			if(ch<'0' || ch>'9') {
 				return 0;
@@ -138,4 +155,5 @@ public class StringUtil {
 		}
 		return isNegative ? -result : result;
 	}
+
 }
