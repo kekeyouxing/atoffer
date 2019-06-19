@@ -1,7 +1,7 @@
 package atoffer.linkedlist;
 
 public class Bootstrap {
-	
+																	
 	public static void main(String[] args) {
 		
 		LinkedListAlgorithm lla = new LinkedListAlgorithm();
