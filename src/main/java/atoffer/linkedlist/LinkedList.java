@@ -3,11 +3,12 @@ package atoffer.linkedlist;
 
 /**
  * @author Ke
- *包含头结点的链表
+ * 包含头结点的链表
  */ 
 public class LinkedList {
 
 	protected LinkedNode pHead = null;
+	
 	
 	public LinkedNode createLinkedList(int[] arr) {
 		pHead = new LinkedNode(-1);
@@ -25,8 +26,7 @@ public class LinkedList {
 		while(pre.next !=null)
 			pre = pre.next;
 		
-		LinkedNode node = new LinkedNode(val);
-		pre.next = node;
+		pre.next = new LinkedNode(val);
 	}
 	
 	public void remove(int val) {
@@ -53,14 +53,6 @@ public class LinkedList {
 			
 		}
 		return false;
-	}
-	
-	public void printList() {
-		LinkedNode first = pHead.next;
-		while(first != null) {
-			System.out.print(first.val+"->");
-			first = first.next;
-		}
 	}
 	
 	public boolean isEmpty() {

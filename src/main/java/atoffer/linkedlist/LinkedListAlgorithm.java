@@ -1,16 +1,6 @@
 package atoffer.linkedlist;
 
-import java.awt.List;
-
-public class LinkedListUtil {
-	
-	private LinkedList linkedList = null;
-	
-	public LinkedListUtil(LinkedList linkedList) {
-		
-		this.linkedList = linkedList;
-		
-	}
+public class LinkedListAlgorithm {
 	
 	/** 
 	 * merge two linkedList
@@ -71,9 +61,7 @@ public class LinkedListUtil {
 		cur = new LinkedNode(-1);
 		cur.next = pre;
 		
-		linkedList.pHead = cur;
 		return cur;
-		
 	}
 	
 	public LinkedNode findFirstCommonNode(LinkedNode pHead1, LinkedNode pHead2) {
@@ -99,4 +87,14 @@ public class LinkedListUtil {
 		
 	}
 	
+	public void printList(LinkedNode pHead) {
+		LinkedNode x = pHead.next;
+		while(x != null) {
+			System.out.print(x.val);
+			if(x.next != null) {
+				System.out.print("->");
+			}
+			x = x.next;
+		}
+	}
 }
