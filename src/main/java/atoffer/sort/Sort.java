@@ -49,6 +49,23 @@ public class Sort {
 		
 	}
 	
+	private int partition(int[] nums, int start, int end) {
+		int middle = nums[start];
+		
+		while(start < end) {
+			if(start < end && nums[end] > middle) {
+				end--;
+			}
+			nums[start] = nums[end];
+			if(start < end && nums[start] <= middle) {
+				start++;
+			}
+			nums[end] = nums[start];
+		}
+		nums[start] = middle;
+		return start;
+	}
+	
 	public void mergeSort(int[] nums) {
 		int[] temp = new int[nums.length];
 		mergeSortCore(nums,temp, 0, nums.length - 1);
@@ -88,29 +105,10 @@ public class Sort {
 		
 		System.arraycopy(temp, 0, nums, start, k);
 	}
-	
-	private int partition(int[] nums, int start, int end) {
-		int middle = nums[start];
-		
-		while(start < end) {
-			if(start < end && nums[end] > middle) {
-				end--;
-			}
-			nums[start] = nums[end];
-			if(start < end && nums[start] <= middle) {
-				start++;
-			}
-			nums[end] = nums[start];
-		}
-		nums[start] = middle;
-		return start;
-	}
-	
+
 	private void swap(int[] nums, int start, int end){
-		
 		int temp = nums[start];
 		nums[start] = nums[end];
 		nums[end] = temp;
-		
 	}
 }
