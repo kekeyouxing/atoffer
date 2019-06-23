@@ -21,35 +21,35 @@ public class LinkedList {
 	}
 	
 	public void add(int val) {
-		LinkedNode pre = pHead;
+		LinkedNode x = pHead.next;
 		
-		while(pre.next !=null)
-			pre = pre.next;
+		while(x != null)
+			x = x.next;
 		
-		pre.next = new LinkedNode(val);
+		x = new LinkedNode(val);
 	}
 	
 	public void remove(int val) {
-		LinkedNode pre = pHead;
-		while(pre != null && pre.next != null) {
-			if(pre.next.val == val) {
-				pre.next = pre.next.next;
+		LinkedNode x = pHead;
+		while(x != null && x.next != null) {
+			if(x.next.val == val) {
+				x.next = x.next.next;
 			}else {
-				pre = pre.next;
+				x = x.next;
 			}
 			
 		}
 	}
 	
 	public boolean containsOf(int val) {
-		LinkedNode pre = pHead.next;
+		LinkedNode x = pHead.next;
 		
-		while(pre != null ) {
+		while(x != null ) {
 			
-			if(pre.val == val) {
+			if(x.val == val) {
 				return true;
 			}
-			pre = pre.next;
+			x = x.next;
 			
 		}
 		return false;

@@ -1,29 +1,64 @@
 package atoffer;
 
 public class Test {
-	private int moreThanHalfNum(int[] nums) {
-		int start = 0, end = nums.length-1;
-		int middle = (start+end)/2;
-		int index  = partition(nums, start, end);
-		while(index!=middle) {
-			if(index<middle) {
-				start = index+1;
-			}else {
-				end = index-1;
+	public void bubbleSort(int[] nums) {
+		for(int i = 0; i < nums.length - 1; i++) {
+			for(int j = 0; j < nums.length - i - 1; j++) {
+				if(nums[j] > nums[j+1]) 
+					swap(nums, j, j+1);
 			}
-			index = partition(nums, start, end);
 		}
-		return nums[index];
+	}
+
+	private void swap(int[] nums, int j, int i) {
+		int temp = nums[i];
+		nums[i] = nums[j];
+		nums[j] = temp;
 	}
 	
+	public void insertSort(int[] nums) {
+		for(int i = 1; i < nums.length; i++) {
+			int preIndex = i-1;
+			int current = nums[i];
+			while(preIndex >= 0 && nums[preIndex] > current) {
+				nums[preIndex+1] = nums[preIndex]; 
+				preIndex--;
+			}
+			nums[preIndex+1] = current;
+		}
+	}
+	
+	public void simpleSort(int[] nums) {
+		for(int i=0; i<nums.length-1; i++) {
+			int min = i;
+			for(int j = i+1; j < nums.length; j++) {
+				if(nums[min] > nums[j])
+					min = j;
+			}
+			swap(nums, i, min);
+		}
+	}
+	
+	public void quickSort(int[] nums) {
+		quickSortCore(nums, 0, nums.length-1);
+	}
+
+	private void quickSortCore(int[] nums, int start, int end) {
+		if(start<end) {
+			int i = partition(nums, start, end);
+			quickSortCore(nums, start, i-1);
+			quickSortCore(nums, i+1, end);
+		}
+	}
+
 	private int partition(int[] nums, int start, int end) {
 		int middle = nums[start];
-		while(start!=end) {
-			while(start<end && nums[end] > middle) {
+		while(start<end) {
+			if(start<end && nums[end]>middle) {
 				end--;
 			}
 			nums[start] = nums[end];
-			while(start<end && nums[start] <= middle) {
+			if(start<end && nums[start]<=middle) {
 				start++;
 			}
 			nums[end] = nums[start];
@@ -32,39 +67,15 @@ public class Test {
 		return start;
 	}
 	
-	private int findKthLargest(int[] nums, int k) {
-		int start = 0, end = nums.length-1;
-		int index = partition(nums, start, end);
-		while(index != k-1) {
-			if(index<k-1) {
-				start = start+1;
-			}else {
-				end = index-1;
-			}
-			index = partition(nums, start, end);
-		}
-		return nums[index];
-	}
-	
-	public int maxSubArray(int[] nums) {
-		int curSum = 0;
-		int max = nums[0];
-		for(int i=0; i<nums.length; i++) {
-			if(curSum<=0) {
-				curSum = nums[i];
-			}else {
-				curSum = curSum + nums[i];
-			}
-			if(curSum>max) {
-				max = curSum;
-			}
-		}
-		return max;
-	}
-	
 	public static void main(String[] args) {
 		Test test = new Test();
-		//test.moreThanHalfNum(new int[]{2,2,2,4,3,5,2,2,2,6});
-		test.findKthLargest(new int[]{2,2,2,4,3,5,2,2,2,6}, 7);
+		int[] nums = new int[] {9,4,6,7,2,3,9};
+		//test.quickSort(nums);
+		//test.bubbleSort(nums);
+		test.simpleSort(nums);
+		for(int i=0;i<nums.length;i++) {
+			System.out.print(nums[i]);
+		}
 	}
+	
 }
