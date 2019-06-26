@@ -155,5 +155,5 @@ public class StringAlgorithm {
 		}
 		return isNegative ? -result : result;
 	}
-
+	
 }
