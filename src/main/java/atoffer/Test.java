@@ -1,54 +1,55 @@
 package atoffer;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.net.InetAddress;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.net.UnknownHostException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 
-public class Test implements Runnable{
+public class Test{
 
-	boolean stopped = false;
-	private ServerSocket server;
-	public void run() {
-		//while(stopped) {
+	class TestStream extends InputStream{
+		InputStream is;
+		private int pos;
+		private int count;
+		byte[] buf; 
+		public TestStream(InputStream input, int maxSize) {
+			this.is = input;
+			buf = new byte[maxSize];
+		}
+		@Override
+		public int read() throws IOException {
 			
-			try {
-				
-				Socket socket = server.accept();
-				System.out.println("创建成功");
-			} catch (IOException e) {
-				System.out.println("test IO");
-				
-				//e.printStackTrace();
-			}catch(NullPointerException nulle) {
-				System.out.println("server is null caused");
-			}
+	        if (pos >= count) {
+	            fill();
+	            if (pos >= count)
+	                return -1;
+	        }
+	        return buf[pos++] & 0xff;
 			
-		//}
+		}
+		
+	    protected void fill()
+	            throws IOException {
+	            pos = 0;
+	            count = 0;
+	            int nRead = is.read(buf, 0, buf.length);
+	            System.out.println(is);
+	            if (nRead > 0) {
+	                count = nRead;
+	            }
+	        }
+		
 	}
-	public ServerSocket initialize() throws UnknownHostException, IOException {
-		return new ServerSocket(8080, 5, InetAddress.getByName("127.0.0.1"));
-	}
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		Test test = new Test();
-		try {
-			test.server = test.initialize();
-		} catch (UnknownHostException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		Thread thread = new Thread(test);
-		thread.start();
-		try {
-			Thread.currentThread().sleep(1000);
-			test.server.close();
-		}catch (IOException e) {
-			System.out.println("main IO");
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		
+		String str = "abcdefghi";
+		InputStream s = new ByteArrayInputStream(str.getBytes(StandardCharsets.UTF_8));
+		InputStream s1 = new ByteArrayInputStream(str.getBytes(StandardCharsets.UTF_8));
+		TestStream input = test.new TestStream(s,2048);
+		TestStream input2 = test.new TestStream(s,2048);
+		input.read();
+		input2.read();
+		
 	}
 }

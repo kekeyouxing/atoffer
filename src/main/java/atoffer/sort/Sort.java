@@ -42,11 +42,11 @@ public class Sort {
 	}
 	
 	public void quickSortCore(int[] nums, int start, int end) {
-		
-		int i = partition(nums, start, end);
-		quickSortCore(nums, start, i - 1);
-		quickSortCore(nums, i + 1, end);
-		
+		if(start < end) {
+			int i = partition(nums, start, end);
+			quickSortCore(nums, start, i - 1);
+			quickSortCore(nums, i + 1, end);
+		}
 	}
 	
 	private int partition(int[] nums, int start, int end) {
