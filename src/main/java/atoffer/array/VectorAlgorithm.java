@@ -98,45 +98,7 @@ public class VectorAlgorithm {
 		nums[start] = middle;
 		return start;
 	}
-	
-	/**
-	 * <p>
-	 * Given an integer array nums, 
-	 * find the contiguous subarray (containing at least one number) 
-	 * which has the largest sum and return its sum.
-	 * <p>
-	 * Example:
-	 * <blockquote>
-	 * <pre>
-	 * Input: [-2,1,-3,4,-1,2,1,-5,4],
-	 * Output: 6
-	 * Explanation: [4,-1,2,1] has the largest sum = 6.</pre>
-	 * </blockquote>
-	 * @param nums integer array nums
-	 * @return
-	 * @see <a href="https://leetcode.com/problems/maximum-subarray">maximum-subarray</a>
-	 */
-	public int maxSubArray(int[] nums) {
-		if(nums == null || nums.length == 0) {
-			return Integer.MIN_VALUE;
-		}
-		int curSum = 0;
-		int max = nums[0];
-		for(int i=0;i<nums.length;i++) {
-			
-			if(curSum<=0) {
-				curSum = nums[i];
-			}else {
-				curSum = curSum+nums[i];
-			}
-			if(curSum>max) {
-				max = curSum;
-			}
-			
-		}
-		return max;
-	}
-	
+
 	/**
 	 * <p>
 	 * Given an array of integers nums sorted in ascending order, 

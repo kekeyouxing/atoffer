@@ -10,7 +10,6 @@ public class CycleLinkedList {
 		this.pHead = pHead;
 	}
 	/**
-	 * @param pHead
 	 * @return node of encounter
 	 */
 	public boolean hasCycle() {

@@ -28,19 +28,15 @@ public class Dynamic {
 		dp[2] = 2;
 		dp[3] = 3;
 		for(int i = 4; i <= n; i++) {
-			
 			int max = 0;
 			for(int j = 1; j <= i/2; j++) {
-				if(dp[j] * dp[i-j] > max) {
-					max = dp[j] * dp[i-j];
-				}
+				max = Math.max(dp[j] * dp[i-j], max);
 			}
 			dp[i] = max;
-			
 		}
 		return dp[n];
 	}
-	
+
 	/**
 	 * <p>
 	 * You are climbing a stair case. It takes n steps to reach to the top.
@@ -174,8 +170,8 @@ public class Dynamic {
 	}
 	
     private int min(int v1,int v2,int v3){
-        int m1 = v1 < v2 ? v1 : v2;
-        return m1 < v3 ? m1 : v3;
+        int m1 = Math.min(v1, v2);
+        return Math.min(m1, v3);
     }
     
     /**
@@ -210,7 +206,7 @@ public class Dynamic {
     	dp[0] = nums[0];
     	dp[1] = Math.max(nums[0], nums[1]);
     	for(int i=2; i<n;i++) {
-    		dp[i] = nums[i]+dp[i-2] >= dp[i-1] ? nums[i]+dp[i-2] : dp[i-1];
+    		dp[i] = Math.max(nums[i] + dp[i - 2], dp[i - 1]);
     	}
 		return dp[n-1];
     }
@@ -251,7 +247,6 @@ public class Dynamic {
         return dp[n-1];
     }
     
-    
     /**
      * <p>
      * On a staircase, the i-th step has some non-negative cost cost[i] assigned (0 indexed).
@@ -275,9 +270,43 @@ public class Dynamic {
     	dp[0] = 0;
     	dp[1] = 0;
     	for(int i=2; i<=cost.length; i++) {
-    		dp[i] = dp[i-1]+cost[i-1] <= dp[i-2]+cost[i-2] ? dp[i-1]+cost[i-1] : dp[i-2]+cost[i-2];
+    		dp[i] = Math.min(dp[i - 1] + cost[i - 1], dp[i - 2] + cost[i - 2]);
     	}
 		return dp[n];  
     }
-    
+
+	/**
+	 * <p>
+	 * Given an integer array nums,
+	 * find the contiguous subarray (containing at least one number)
+	 * which has the largest sum and return its sum.
+	 * <p>
+	 * Example:
+	 * <blockquote>
+	 * <pre>
+	 * Input: [-2,1,-3,4,-1,2,1,-5,4],
+	 * Output: 6
+	 * Explanation: [4,-1,2,1] has the largest sum = 6.</pre>
+	 * </blockquote>
+	 * @param nums integer array nums
+	 * @return
+	 * @see <a href="https://leetcode.com/problems/maximum-subarray">maximum-subarray</a>
+	 */
+	public int maxSubArray(int[] nums) {
+		int result = Integer.MIN_VALUE;
+		if(nums == null || nums.length == 0) {
+			return result;
+		}
+		int[] dp = new int[nums.length];
+		dp[0] = nums[0];
+		for (int i = 1; i < nums.length; i++) {
+			dp[i] = Math.max(dp[i-1] + nums[i], nums[i]);
+		}
+		for (int i = 0; i < dp.length; i++) {
+			if(result < dp[i]){
+				result = dp[i];
+			}
+		}
+		return result;
+	}
 }

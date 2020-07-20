@@ -1,22 +1,34 @@
 package atoffer.linkedlist;
 
 public class Bootstrap {
-																	
+
 	public static void main(String[] args) {
-		
+
 		LinkedListAlgorithm lla = new LinkedListAlgorithm();
-		
-		
-		LinkedList link = new LinkedList();
-		int [] arr = new int[] {1,2,3,4,2,5,7};
-		
-		System.out.println("after creating LinkedList, LinkedList is:");
-		LinkedNode pHead = link.createLinkedList(arr);
-		lla.printList(pHead);
-		
-		System.out.println("\nafter reversing LinkedList, LinkedList is:");
-		pHead = lla.reverseList(pHead);
-		lla.printList(pHead);
+
+		LinkedList linkA = new LinkedList();
+		int[] c = new int[]{2, 2, 6, 7, 10};
+		System.out.print("Create LinkedList-A: ");
+		linkA.create(c);
+		System.out.println(linkA);
+
+		int val = 9;
+		System.out.print("Add " + val + " LinkedList-A: ");
+		linkA.add(val);
+		System.out.println(linkA);
+
+//		val = 2;
+//		System.out.print("Remove " + val + ", LinkedList-A: ");
+//		linkA.remove(val);
+//		System.out.println(linkA);
+
+		System.out.print("Reverse LinkedList-A: ");
+		linkA.reverseList();
+		System.out.println(linkA);
+
+		System.out.print("Remove duplicate LinkedList-A: ");
+		linkA.removeDuplicate();
+		System.out.println(linkA);
 	}
-	
+
 }
